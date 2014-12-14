@@ -1,10 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'mood_tracker.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from tracker import urls as tracker
 
+urlpatterns = patterns('',
+    url(r'api/', include(tracker.api_patterns)),
     url(r'^admin/', include(admin.site.urls)),
 )

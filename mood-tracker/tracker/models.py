@@ -15,15 +15,19 @@ class TrackerLogEntry(model_utils.TimeStampedModel,
 
     Entries are timestamped with modified and created datetimes.
     """
-    # TimeFramedModel gives start/end -- for logging when the event happened
-    # TimeStampedModel gives created/modified -- mostly for conflict resolution
-    event_type = django_models.ForeignKey('EventType', db_index=True)
+    # Added via TimeStamped/FramedModels:
+    # start, end, created, modified (all DateTimes)
+    event_type = django_models.ForeignKey('EventType', db_index=True, related_name='logs')
     event_data = django_models.TextField()
+
+    # TODO add validation to make sure start time before end time
+    class Meta:
+        ordering = ('start',)
 
 
 class EventType(django_models.Model):
     """
     What sort of event is being logged. Each has name and slug.
     """
+    slug = django_models.SlugField(unique=True)
     name = django_models.CharField(max_length=50)
-    slug = django_models.SlugField()
