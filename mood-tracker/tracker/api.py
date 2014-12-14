@@ -1,6 +1,4 @@
 from rest_framework import viewsets
-# TODO remove this
-from django.views.decorators.csrf import csrf_exempt
 
 from .models import TrackerLogEntry, EventType
 from .serialisers import TrackerLogEntrySerialiser, EventTypeSerialiser
