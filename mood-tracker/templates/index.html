@@ -3,9 +3,18 @@
 <html>
 <head>
     <title>Moo's Mood Tracker</title>
+    {% if DEBUG %}
+        <link rel="stylesheet/less" type="text/css" href="{% static 'less/main.less' %}" />
+        <script src="{% static 'js/lib/less.js' %}" type="text/javascript"></script>
+    {% else %}
+        {# TODO Set up grunt for distribution & compilation #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% endif %}
 </head>
 <body>
 Foo those bars!
+<button class="btn btn-primary"> FOOOOO</button>
+
 <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

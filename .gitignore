@@ -1,3 +1,7 @@
+# General stuff
 .DS_Store
 .venv
 *.pyc
+
+# Don't include CSS
+mood-tracker/static/css
