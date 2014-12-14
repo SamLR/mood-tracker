@@ -61,8 +61,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mood_tracker',
         'USER': 'mood',
-        'PASSWORD': '.47-77"fN} -(-^p2j4D:58@x.},G"Zp',
         'HOST': 'localhost',
+        'PASSWORD': '.47-77"fN} -(-^p2j4D:58@x.},G"Zp',
     }
 }
 
