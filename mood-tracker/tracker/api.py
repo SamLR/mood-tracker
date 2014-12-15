@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import TrackerLogEntry, EventType
-from .serialisers import TrackerLogEntrySerialiser, EventTypeSerialiser
+from .models import TrackerLogEntry, EventType, Tags
+from .serialisers import TrackerLogEntrySerialiser, EventTypeSerialiser, TagsSerialiser
 
 class LogViewSet(viewsets.ModelViewSet):
     queryset = TrackerLogEntry.objects.all()
@@ -29,6 +29,22 @@ event_list = EventViewSet.as_view({
     })
 
 event_detail = EventViewSet.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy',
+    })
+
+
+class TagsViewSet(viewsets.ModelViewSet):
+    queryset = Tags.objects.all()
+    serializer_class = TagsSerialiser
+
+tags_list = TagsViewSet.as_view({
+        'get': 'list',
+        'post': 'create',
+    })
+
+tags_detail = TagsViewSet.as_view({
         'get': 'retrieve',
         'put': 'update',
         'delete': 'destroy',

@@ -14,4 +14,6 @@ api_patterns = patterns('',
     url(r'^logs/(?P<pk>[0-9]+)/$',  api.log_detail,   name='api.log_detail'  ),
     url(r'^events/$',               api.event_list,   name='api.event_list'  ),
     url(r'^events/(?P<pk>[0-9]+)$', api.event_detail, name='api.event_detail'),
+    url(r'^tags/$',                 api.tags_list,    name='api.tags_list'  ),
+    url(r'^tags/(?P<pk>[0-9]+)$',   api.tags_detail,  name='api.tags_detail'),
 )
