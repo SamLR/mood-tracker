@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html data-ng-app="moodTracker">
 <head>
     <title>Moo's Mood Tracker</title>
     {% if DEBUG %}
@@ -13,6 +13,10 @@
 </head>
 <body>
 
+<div data-ng-view>
+    If you can read this you need a better browser (or to enable javascript).
+</div>
+
 {# Angular stuff #}
 <script src="{% static 'js/lib/angular.js' %}"></script>
 <script src="{% static 'js/lib/angular-route.js' %}"></script>
@@ -20,5 +24,7 @@
 
 {# Our stuff #}
 <script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/controllers/homeController.js' %}"></script>
+<script src="{% static 'js/controllers/eventController.js' %}"></script>
 </body>
 </html>
