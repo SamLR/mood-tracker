@@ -1,8 +1,9 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html data-ng-app="moodTracker">
+<html lang="en" data-ng-app="moodTracker">
 <head>
     <title>Moo's Mood Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if DEBUG %}
         <link rel="stylesheet/less" type="text/css" href="{% static 'less/main.less' %}" />
         <script src="{% static 'js/lib/less.js' %}" type="text/javascript"></script>
@@ -13,11 +14,12 @@
 </head>
 <body>
 
-<div data-ng-view>
+<div class="container-fluid" data-ng-view>
     If you can read this you need a better browser (or to enable javascript).
 </div>
 
 {# Angular stuff #}
+<script src="{% static 'js/lib/lodash.js' %}"></script>
 <script src="{% static 'js/lib/moment.js' %}"></script>
 <script src="{% static 'js/lib/angular.js' %}"></script>
 <script src="{% static 'js/lib/angular-route.js' %}"></script>
