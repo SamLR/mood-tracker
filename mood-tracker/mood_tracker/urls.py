@@ -6,6 +6,8 @@ from tracker import urls as tracker
 
 from .views import BaseView
 
+# TODO set append trailing slash
+
 urlpatterns = patterns('',
     url(r'^$', BaseView.as_view(), name='home'),
     url(r'^api/', include(tracker.api_patterns)),

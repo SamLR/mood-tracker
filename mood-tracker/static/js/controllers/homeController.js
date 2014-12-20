@@ -4,16 +4,37 @@ angular.module('moodTracker').controller('homeController', [
     '$scope', '$http',
     function ($scope, $http) {
         'use strict';
+        $scope.sleep = {
+            event_type: 2,
+        };
+        
+        $scope.submitSleep = function() {
+            var sleep = $scope.sleep,
+                start  = moment(sleep.start).format(),
+                end    = moment(sleep.end).format(),
+                data   = {
+                    // TODO: this should be programmatically figured out
+                    user: 1,
+                    event_type: 2,
+                    // Actual data
+                    start:  start,
+                    end:    end,
+                    rating: parseInt(sleep.rating, 10)
+                },
+                tags;
 
-        $scope.sendEvent = function() {
-            $http.put('api/logs/20', {
-                user: 1,
-                event_type: 1,
-                start: moment([2010, 1, 1, 6, 6, 6]),
-                end:   moment([2010, 2, 2, 10, 10, 10]),
-                data: JSON.stringify({something: 'completely different (CHEESE!)'}),
-                tags: [1,2]
-            });
+            if (sleep.notes) {
+                data.data = JSON.stringify({notes: sleep.notes});
+            }
+
+            if (sleep.tags) {
+                tags = sleep.tags.split(',');
+                data.tags = _.map(tags, function (current_tag){
+                    return parseInt(current_tag, 10);
+                });
+            }
+
+            $http.post('api/logs/', data);
         };
     }
 ]);
