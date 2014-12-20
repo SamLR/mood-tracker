@@ -6,6 +6,7 @@ import django.utils.timezone
 from django.conf import settings
 import model_utils.fields
 
+# TODO Delete all migrations and squash into one prior to deploy
 
 class Migration(migrations.Migration):
 
