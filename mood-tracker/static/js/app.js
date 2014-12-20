@@ -9,6 +9,15 @@ angular.module('moodTracker', ['ngRoute', 'ui.bootstrap'])
     $interpolateProvider.endSymbol(']]');
 }])
 
+.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.html5Mode(true);
+}])
+
+.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+}])
+
 .config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider.when('/', {
@@ -20,5 +29,4 @@ angular.module('moodTracker', ['ngRoute', 'ui.bootstrap'])
         templateUrl: 'static/partials/home.html',
         controller: 'eventController'
     });
-
 }]);
