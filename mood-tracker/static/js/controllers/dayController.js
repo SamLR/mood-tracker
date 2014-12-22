@@ -7,15 +7,13 @@ angular.module('moodTracker').controller('dayController', [
 
         var _date = null;
 
-        $scope.sleep = {
-            event_type: 2,
-        };
+        $scope.sleep = {};
         
         $scope.submitSleep = function() {
             var sleep = $scope.sleep,
                 data = {
                     user: 1,
-                    event_type: 2,
+                    event_type: 1,
                     rating: parseInt(sleep.rating, 10)
                 },
                 start = sleep.start.split(':'),

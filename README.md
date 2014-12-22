@@ -16,7 +16,7 @@ Today is a form split into two broad groups:
         + Sleep
             * Start/end times
             * Rating [0, 5] stars
-            * Option to add naps
+            * [Option to add naps]
         + Mood [0, 5] stars
         + Alertness [0, 5] stars
         + Productivity [0, 5] stars
