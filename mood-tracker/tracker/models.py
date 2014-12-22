@@ -7,8 +7,7 @@ from django.contrib.auth.models import User
 
 from model_utils import models as model_utils
 
-class TrackerLogEntry(model_utils.TimeStampedModel,
-                      model_utils.TimeFramedModel):
+class TrackerLogEntry(model_utils.TimeStampedModel):
     """
     A log entry, has a start/end time and a JSON object which stores the
     data of event. Each entry has an 'event type' which is the primary
@@ -16,10 +15,13 @@ class TrackerLogEntry(model_utils.TimeStampedModel,
 
     Entries are timestamped with modified and created datetimes.
     """
-    # Added via TimeStamped/FramedModels:
-    # start, end, created, modified (all DateTimes)
+    # Added via TimeStamped: created, modified (all DateTimes)
     user = django_models.ForeignKey(User, db_index=True, related_name='logs')
     event_type = django_models.ForeignKey('EventType', db_index=True, related_name='logs')
+
+    # Want these indexed & non-null, timeframedmodel is neither indexed or required
+    start = django_models.DateTimeField(db_index=True)
+    end   = django_models.DateTimeField(db_index=True)
 
     tags = django_models.ManyToManyField('Tags', related_name='logs', null=True)
     data = django_models.TextField(null=True)
@@ -44,5 +46,3 @@ class Tags(django_models.Model):
     """
     slug = django_models.SlugField(unique=True)
     name = django_models.CharField(max_length=256)
-    # This has an extra column which maps a tag to the events that use it
-    # TODO look at making tags relational?
