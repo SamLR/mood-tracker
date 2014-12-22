@@ -12,6 +12,10 @@ urlpatterns = patterns('',
     url(r'^$', BaseView.as_view(), name='home'),
     url(r'^api/', include(tracker.api_patterns)),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', 'django.contrib.auth.views.login', 
+        {
+            'template_name': 'login.html'
+        }),
     # url(r'.*', BaseView.as_view()), # catch all
 )
 
