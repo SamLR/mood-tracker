@@ -2,7 +2,7 @@
  * Root point for angular app
  */
 
-angular.module('moodTracker', ['ui.router', 'ui.bootstrap'])
+angular.module('moodTracker', ['ui.select','ui.router', 'ui.bootstrap', 'ngSanitize'])
 
 // Don't get confused with Django templating stuff
 .config(['$interpolateProvider', function ($interpolateProvider) {
@@ -35,7 +35,7 @@ angular.module('moodTracker', ['ui.router', 'ui.bootstrap'])
         controller: 'dayController'
     })
     .state('log', {
-        url: '/log/{year:[0-9]{4}}/{month:[01][0-9]}/{day:[0123][0-9]}/',
+        url: '/log/{year:[0-9]{4}}/{month:[01][0-9]}/{day:[0123][0-9]}',
         templateUrl: '/static/partials/day.html',
         controller: 'dayController'
     });

@@ -9,20 +9,22 @@ angular.module('moodTracker').controller('dayController', [
 
         $scope.sleep = {};
         
-        $scope.submitSleep = function() {
+        function _getSleep () {
             var sleep = $scope.sleep,
                 data = {
                     user: 1,
                     event_type: 1,
                     rating: parseInt(sleep.rating, 10)
                 },
-                start = sleep.start.split(':'),
-                end   = sleep.end.split(':'),
+                start = _.map(sleep.start.split(':'), function (a){
+                    return parseInt(a,10);
+                }),
                 tags;
 
-            // TODO sort out sleep from yesterday
-            data.start = _date.day(-1).hour(start[0]).minute(start[1]).format();
-            data.end   = _date.hour(end[0]).minute(end[1]).format();
+            data.start = moment(_date).add(-1, 'days')
+                                      .hours(start[0]).minutes(start[1]);
+            data.end   = moment(data.start).add(sleep.end, 'hours').format();
+            data.start = data.start.format();
 
             if (sleep.notes) {
                 data.data = JSON.stringify({notes: sleep.notes});
@@ -34,8 +36,14 @@ angular.module('moodTracker').controller('dayController', [
                     return parseInt(current_tag, 10);
                 });
             }
+            return data;
+        }
 
-            $http.post('/api/logs/', data);
+        $scope.submitDay = function() {
+            var sleep = _getSleep();
+
+
+            $http.post('/api/logs/', sleep);
         };
 
         function _init(){

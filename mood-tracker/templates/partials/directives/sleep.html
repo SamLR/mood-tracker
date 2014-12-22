@@ -1,0 +1,59 @@
+<div class="form-group" ng-init="isCollapsed = true">
+  <label class="col-sm-1 control-label" for="sleepStartTime">Start:</label>
+  <div class="col-sm-3">
+    <input
+      required
+      type="text"
+      class="form-control"
+      id="sleepStartTime"
+      placeholder="HH:MM"
+      ng-model="sleepObj.start"
+    >
+  </div>
+  <label class="col-sm-1 control-label" for="sleepEndTime">Length:</label>
+  <div class="col-sm-3">
+    <input
+      required
+      type="number"
+      class="form-control"
+      id="sleepEndTime"
+      placeholder="Hours"
+      ng-model="sleepObj.end"
+    >
+  </div>
+  <label class="col-sm-1 control-label " for="sleepRating">Rating:</label>
+  <div class="col-sm-2">
+    <rating ng-model="sleepObj.rating">
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+      <i class="glyphicon"
+        aria-hidden="true"
+        ng-class="{'glyphicon-chevron-down': isCollapsed, 'glyphicon-chevron-up': !isCollapsed}"
+      ></i>
+    </button>
+  </div>
+</div>
+
+<div collapse="isCollapsed">
+  <div class="form-group">
+    <label class="control-label col-sm-1" for="sleepRating">Tags:</label>
+    <!-- TODO replace with multi-select box drawn off of tags db -->
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        id="sleepRating"
+        placeholder="pk's"
+        ng-model="sleepObj.tags"
+      >
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-1" for="sleepNotes">Notes:</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" ng-model="sleepObj.notes" rows="3" id="sleepNotes"></textarea>
+    </div>
+  </div>
+</div>
