@@ -2,31 +2,41 @@
  * Root point for angular app
  */
 
-angular.module('moodTracker', ['ngRoute', 'ui.bootstrap'])
+angular.module('moodTracker', ['ui.router', 'ui.bootstrap'])
 
+// Don't get confused with Django templating stuff
 .config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 }])
 
+// Use html push history
 .config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode(true);
 }])
 
+// Tell angular to use Django's CSRF cookies
 .config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 }])
 
-.config(['$routeProvider', function ($routeProvider) {
+// If in doubt redirect to...
+.config(['$urlRouterProvider', function ($urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+}])
 
-    $routeProvider.when('/', {
-        templateUrl: 'static/partials/home.html',
-        controller: 'homeController'
-    });
+// Our actual states
+.config(['$stateProvider', function ($stateProvider) {
 
-    $routeProvider.when('/event/:id', {
-        templateUrl: 'static/partials/home.html',
-        controller: 'eventController'
+    $stateProvider.state('today', {
+        url : '/',
+        templateUrl: '/static/partials/day.html',
+        controller: 'dayController'
+    })
+    .state('log', {
+        url: '/log/{year:[0-9]{4}}/{month:[01][0-9]}/{day:[0123][0-9]}/',
+        templateUrl: '/static/partials/day.html',
+        controller: 'dayController'
     });
 }]);

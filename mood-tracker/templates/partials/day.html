@@ -1,0 +1,57 @@
+<div class="row">
+    <h1>Sleep</h1>
+    <form class="col-md-10 col-md-offset-1" ng-submit="submitSleep()">
+        <div class="form-group">
+            <label for="sleepStartTime">Start:</label>
+            <!-- TODO replace with datepicker -->
+            <input
+                required
+                type="text"
+                class="form-control"
+                id="sleepStartTime"
+                placeholder="hh:mm"
+                ng-model="sleep.start"
+            >
+        </div>
+        <div class="form-group">
+            <label for="sleepEndTime">End:</label>
+            <!-- TODO replace with datepicker -->
+            <input
+                required
+                type="text"
+                class="form-control"
+                id="sleepEndTime"
+                placeholder="hh:mm"
+                ng-model="sleep.end"
+            >
+        </div>
+        <div class="form-group">
+            <label for="sleepRating">Rating:</label>
+            <!-- TODO replace with Ratings -->
+            <input
+                required
+                type="number"
+                class="form-control"
+                id="sleepRating"
+                placeholder="0-5"
+                ng-model="sleep.rating"
+            >
+        </div>
+        <div class="form-group">
+            <label for="sleepRating">Tags:</label>
+            <!-- TODO replace with multi-select box drawn off of tags db -->
+            <input
+                type="text"
+                class="form-control"
+                id="sleepRating"
+                placeholder="pk's"
+                ng-model="sleep.tags"
+            >
+        </div>
+        <div class="form-group">
+            <label for="sleepNotes">Notes:</label>
+            <textarea class="form-control" ng-model="sleep.notes" rows="3" id="sleepNotes"></textarea>
+        </div>
+        <button class="btn btn-default">Submit</button>
+    </form>
+</div>
