@@ -6,15 +6,18 @@ from tracker import urls as tracker
 
 from .views import BaseView
 
-# TODO set append trailing slash
+# set append trailing slash, this is set by default. Need to make better catch all
 
 urlpatterns = patterns('',
     url(r'^$', BaseView.as_view(), name='home'),
-    url(r'^api/', include(tracker.api_patterns)),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'log/\d{4}/\d{2}/\d{2}$', BaseView.as_view()),
+
     url(r'^login/$', 'django.contrib.auth.views.login', 
         {'template_name': 'login.html'}, name='login'),
-    # url(r'.*', BaseView.as_view()), # catch all
+    
+    url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^api/', include(tracker.api_patterns)),
 )
 
 
