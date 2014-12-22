@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     # Third part
     'rest_framework',
     'django_extensions',
+    'stronghold',
 
     # Out stuff
     'tracker',
@@ -54,6 +55,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'stronghold.middleware.LoginRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'mood_tracker.urls'
@@ -94,7 +97,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
 
 
 # Static files (CSS, JavaScript, Images)
