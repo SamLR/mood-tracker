@@ -1,13 +1,17 @@
 /* global angular, moment */
 
 angular.module('moodTracker').controller('dayController', [
-    '$scope', '$http', '$state',
-    function ($scope, $http, $state) {
+    '$scope', '$http', '$state', 'eventTypeService', 'tagsService',
+    function ($scope, $http, $state, eventTypeService, tagsService) {
         'use strict';
 
-        var _date = null;
+        var _date = null,
+            _events = {};
 
+        // TODO Should auto generate view based on events rather than hard coding
+        $scope.tags = {};
         $scope.sleep = {};
+        $scope.miscRatings = {};
         
         function _getSleep () {
             var sleep = $scope.sleep,
@@ -42,7 +46,6 @@ angular.module('moodTracker').controller('dayController', [
         $scope.submitDay = function() {
             var sleep = _getSleep();
 
-
             $http.post('/api/logs/', sleep);
         };
 
@@ -59,7 +62,16 @@ angular.module('moodTracker').controller('dayController', [
             } else {
                 _date = moment(); // today
             }
-            console.log(_date.format());
+            
+            eventTypeService.getEvents().then(function (events) {
+                 _events = events;
+                console.log(_events);
+            });
+
+            tagsService.getTags().then(function (tags) {
+                $scope.tags = tags;
+                console.log(tags);
+            });
         }
 
         _init();
