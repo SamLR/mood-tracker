@@ -18,7 +18,7 @@
       class="form-control"
       id="sleepEndTime"
       placeholder="Hours"
-      ng-model="sleepObj.end"
+      ng-model="sleepObj.duration"
     >
   </div>
   <label class="col-sm-1 control-label " for="sleepRating">Rating:</label>
@@ -38,22 +38,14 @@
 <div collapse="isCollapsed">
   <div class="form-group">
     <label class="control-label col-sm-1" for="sleepRating">Tags:</label>
-    <!-- TODO replace with multi-select box drawn off of tags db -->
     <div class="col-sm-9">
-      <!-- <input -->
-<!--         type="text" -->
-<!--         class="form-control" -->
-<!--         id="sleepRating" -->
-<!--         placeholder="pk's" -->
-<!--         ng-model="sleepObj.tags" -->
-<!--       > -->
       <ui-select
-        multi
+        multiple
         ng-model="sleepObj.tags"
         theme="bootstrap"
       >
         <ui-select-match allow-clear placeholder="Add tags...">
-          [[ $select.selected.name ]]
+          [[ $item.name ]]
         </ui-select-match>
         <ui-select-choices repeat="t in tags | filter: $select.search">
           [[ t.name ]]

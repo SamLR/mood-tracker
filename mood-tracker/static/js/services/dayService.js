@@ -31,8 +31,8 @@ angular.module('moodTracker')
     }
 
     function _serialiseEvent (eventObj) {
-        var res = _.deepClone(eventObj);
-        res.event_type = res.id;
+        var res = _.cloneDeep(eventObj);
+        res.event_type = res.event_type.id;
         res.tags = _.pluck(res.tags, 'id');
         return res;
     }
@@ -72,9 +72,9 @@ angular.module('moodTracker')
                 dataToSend = _serialiseEvent(event);
             
             if (event.id) {
-                promises.push($http.put(_apiRoot + event.id, event));
+                promises.push($http.put(_apiRoot + event.id, dataToSend));
             } else {
-                promises.push($http.post(_apiRoot, event));
+                promises.push($http.post(_apiRoot, dataToSend));
             }
         });
         return $q.all(promises)

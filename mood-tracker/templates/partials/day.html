@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <form class="form-horizontal" ng-submit="submitDay()">
+    <form class="form-horizontal">
       <h2>Sleep</h2>
       <moo-sleep sleep-obj="sleep" tags="tags"></moo-sleep>
 
@@ -25,7 +25,7 @@
         <rating ng-model="miscRatings.diet">
       </div>
 
-      <button class="btn btn-default">Submit</button>
+      <button class="btn btn-default" ng-click="submitDay()">Submit</button>
     </form>
   </div>
 </div>
