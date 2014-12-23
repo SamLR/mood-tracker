@@ -1,17 +1,9 @@
+/* global angular, _ */
+
 angular.module('moodTracker')
 .factory('tagsService',['$http', function($http) {
 
-    var _apiRoot = '/api/tags/',
-        _tags = {};
-
-
-    function _getTags () {
-        return $http.get(_apiRoot, {cache: true})
-                    .then(function (results) {
-                        _tags = _.indexBy(results.data, 'slug');
-                        return _tags;
-                    });
-    }
+    var _apiRoot = '/api/tags/';
 
     function _slugify (slug) {
         return slug.toLowerCase()
@@ -19,24 +11,33 @@ angular.module('moodTracker')
                .replace(/[^\w-]+/g, '');
     }
 
-    function _addTag (tagName) {
-        var dataToSend = {
-                name: tagName,
-                slug: _slugify(tagName)
-            },
-            _onSuccess = function (results) {                
-                var data = results.data;
-                _tags[data.slug] = data;
-                return data;
+    return $http.get(_apiRoot)
+        .then(function (results) {
+            var _tags   = results.data,
+                _byId   = _.indexBy(_tags, 'id'),
+                _bySlug = _.indexBy(_tags, 'slug');
+
+            var _addTag = function (tagName) {
+                var dataToSend = {
+                        name: tagName,
+                        slug: _slugify(tagName)
+                    };
+
+                return $http.post(_apiRoot, dataToSend)
+                    .then(function (results) {
+                        var tag = results.data;
+                        _tags.push(tag);
+                        _byId[tag.id] = tag;
+                        _bySlug[tag.slug] = tag;
+                        return tag;
+                    });
             };
 
-        return $http.post(_apiRoot, dataToSend).then(_onSuccess);
-    }
-
-    _getTags();
-
-    return {
-        addTag:  _addTag,
-        getTags: _getTags
-    };
+            return {
+                addTag:       _addTag,
+                getTags:      function()     { return _tags;         },
+                getTagById:   function(id)   { return _byId[id];     },
+                getTagBySlug: function(slug) { return _bySlug[slug]; }
+            };
+        });
 }]);

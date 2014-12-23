@@ -1,19 +1,20 @@
+/* global angular, _ */
+
 angular.module('moodTracker')
 .factory('eventTypeService',['$http', function ($http) {
 
     var _apiRoot = '/api/events/';
 
-    function _getEvents () {
-        return $http.get(_apiRoot, {cache: true})
-                    .then(function (results) {
-                        var res = _.indexBy(results.data, 'slug');
-                        return res;
-                    });
-    }
+    return $http.get(_apiRoot)
+        .then(function (results) {
+            var _eventTypes = results.data,
+                _byId       = _.indexBy(_eventTypes, 'id'),
+                _bySlug     = _.indexBy(_eventTypes, 'slug');
 
-    _getEvents();
-
-    return {
-        getEvents: _getEvents
-    };
+            return {
+                getEvents:      function ()     { return _eventTypes;   },
+                getEventByid:   function (id)   { return _byId[id];     },
+                getEventBySlug: function (slug) { return _bySlug[slug]; }
+            };
+        });
 }]);
