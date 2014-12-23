@@ -3,7 +3,8 @@ angular.module('moodTracker')
     return {
         restrict: 'E',
         scope: {
-            sleepObj: '='
+            sleepObj: '=',
+            tags: '='
         },
         templateUrl: '/static/partials/directives/sleep.html'
     };
