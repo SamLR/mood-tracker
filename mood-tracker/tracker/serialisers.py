@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from .models import TrackerLogEntry, EventType, Tags
 
 class EventTypeSerialiser(serializers.ModelSerializer):
@@ -12,8 +11,6 @@ class TagsSerialiser(serializers.ModelSerializer):
         model = Tags
 
 class TrackerLogEntrySerialiser(serializers.ModelSerializer):
-    # TODO infer user
-
     class Meta:
         model = TrackerLogEntry
 

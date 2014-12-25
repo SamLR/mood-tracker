@@ -18,6 +18,14 @@
     If you can read this you need a better browser (or to enable javascript).
 </div>
 
+{# Inject user info #}
+<script>
+    _user = {
+        userId : {{ user.id }},
+        userName : '{{ user.username }}'
+    };
+</script>
+
 {# Angular stuff #}
 <script src="{% static 'js/lib/lodash.js' %}"></script>
 <script src="{% static 'js/lib/moment.js' %}"></script>

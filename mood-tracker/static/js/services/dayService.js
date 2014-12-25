@@ -1,8 +1,8 @@
 /* global angular, moment, _ */
 
 angular.module('moodTracker')
-.factory('dayService',['$http', '$q', 'eventTypeService', 'tagsService',
-    function ($http, $q, eventTypeServicePromise, tagsServicePromise) {
+.factory('dayService',['$http', '$q', 'eventTypeService', 'tagsService', 'userId',
+    function ($http, $q, eventTypeServicePromise, tagsServicePromise, userId) {
 
     var _apiRoot = '/api/logs/',
         _dateFmt = 'YYYY-MM-DD',
@@ -32,6 +32,7 @@ angular.module('moodTracker')
 
     function _serialiseEvent (eventObj) {
         var res = _.cloneDeep(eventObj);
+        res.user = userId;
         res.event_type = res.event_type.id;
         res.tags = _.pluck(res.tags, 'id');
         return res;

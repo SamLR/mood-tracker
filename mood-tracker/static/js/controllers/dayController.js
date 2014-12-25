@@ -27,7 +27,6 @@ angular.module('moodTracker')
             }
             
             return {
-                    user: 1, // TODO infer this
                     start:      start.format(),
                     end:        end.format(),
                     tags:       sleep.tags,
@@ -38,7 +37,6 @@ angular.module('moodTracker')
 
         function _getFullDayEvent(typeSlug, dataObject) {
             return _.extend({
-                user:       1, 
                 start:      _dayStart.format(),
                 end:        _dayEnd.format(),
                 event_type: _eventsService.getEventBySlug(typeSlug)

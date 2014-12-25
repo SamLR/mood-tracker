@@ -4,6 +4,10 @@
 
 angular.module('moodTracker', ['ui.select','ui.router', 'ui.bootstrap', 'ngSanitize'])
 
+// Set user info
+.value('userName', _user.userName)
+.value('userId',   _user.userId)
+
 // Don't get confused with Django templating stuff
 .config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
