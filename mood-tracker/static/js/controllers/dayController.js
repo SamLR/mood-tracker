@@ -76,12 +76,10 @@ angular.module('moodTracker')
 
             eventServicePromise.then(function (service) {
                  _eventsService = service;
-                console.log('eventTypes', _eventsService.getEvents());
             });
 
             tagsServicePromise.then(function (service) {
                 _tagService = service;
-                console.log('tags', _tagService.getTags());
                 $scope.tags = _tagService.getTags();
             });
 

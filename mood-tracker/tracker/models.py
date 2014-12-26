@@ -19,7 +19,7 @@ class TrackerLogEntry(model_utils.TimeStampedModel):
     user = django_models.ForeignKey(User, db_index=True, related_name='logs')
     event_type = django_models.ForeignKey('EventType', db_index=True, related_name='logs')
 
-    # Want these indexed & non-null, timeframedmodel is neither indexed or required
+    # Want these indexed & non-null, timeframed model is neither indexed or required
     start = django_models.DateTimeField(db_index=True)
     end   = django_models.DateTimeField(db_index=True)
 
@@ -27,7 +27,6 @@ class TrackerLogEntry(model_utils.TimeStampedModel):
     data = django_models.TextField(null=True)
     rating = django_models.IntegerField(null=True)
 
-    # TODO add validation to make sure start time before end time
     class Meta:
         ordering = ('start',)
 
