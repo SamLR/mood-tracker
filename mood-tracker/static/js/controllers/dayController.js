@@ -19,20 +19,25 @@ angular.module('moodTracker')
                 startHr  = sleep.start.split(':')[0],
                 startMin = sleep.start.split(':')[1],
                 start = moment(_dayStart).hours(startHr).minutes(startMin),
-                end = moment(start).add(parseFloat(sleep.duration), 'hours');
+                end = moment(start).add(parseFloat(sleep.duration), 'hours'),
+                res = {
+                    tags:       sleep.tags,
+                    rating:     sleep.rating,
+                    data:       JSON.stringify({notes: sleep.notes}) || '',
+                    event_type: _eventsService.getEventBySlug('sleep'), // TODO set this else where?
+                };
 
             if (end > _dayEnd) { // put the sleep at the start of the day
                 end   =   end.add(-1, 'days');
                 start = start.add(-1, 'days');
             }
-            
-            return {
-                    start:      start.format(),
-                    end:        end.format(),
-                    tags:       sleep.tags,
-                    data:       JSON.stringify({notes: sleep.notes}) || '',
-                    event_type: _eventsService.getEventBySlug('sleep'), // TODO set this else where?
-                };
+
+            res.start = start.format();
+            res.end = end.format();
+
+            if (sleep.id) { res.id = sleep.id; }
+
+            return res;
         }
 
         function _getFullDayEvent(typeSlug, dataObject) {
@@ -47,9 +52,7 @@ angular.module('moodTracker')
             var day = { sleep:_getSleep() };
 
             _.each(_ratingOnlyEvents, function (typeSlug) {
-                day[typeSlug] = _getFullDayEvent(typeSlug, {
-                    rating: $scope.miscRatings[typeSlug]
-                });
+                day[typeSlug] = _getFullDayEvent(typeSlug, $scope.miscRatings[typeSlug]);
             });
 
             _dayService.addDay(day);
@@ -85,7 +88,20 @@ angular.module('moodTracker')
             dayServicePromise.then(function (service) {
                 _dayService = service;
                 // Actually do something with this
-                _dayLog = service.getDay(_dayStart);
+                return service.getDay(_dayStart);
+            }).then(function (_dayLog) {
+                if ( _.isEmpty(_dayLog) ) { return; }
+
+                _.each(_dayLog, function (event, key) {
+                    if (key === 'sleep') {
+                        $scope.sleep = event;
+                        $scope.sleep.duration = moment.duration(moment(event.end) - moment(event.start)).hours();
+                        $scope.sleep.start = moment($scope.sleep.start).format('HH:MM');
+
+                    } else {
+                        $scope.miscRatings[key] = event;
+                    }
+                });
             });
         }
 

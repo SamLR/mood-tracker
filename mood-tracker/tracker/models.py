@@ -31,7 +31,7 @@ class TrackerLogEntry(model_utils.TimeStampedModel):
     class Meta:
         ordering = ('start',)
 
-
+# Include info on directives etc.
 class EventType(django_models.Model):
     """
     What sort of event is being logged. Each has name and slug.

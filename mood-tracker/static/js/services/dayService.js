@@ -41,7 +41,7 @@ angular.module('moodTracker')
     function _getDayURL (day) {
         // TODO check for utils to generate query strings
         var beforeDay = moment(day).add(1, 'day'),
-            queryString = '?ends_after'  + _dayKey(day) + '&ends_before' + _dayKey(beforeDay);
+            queryString = '?ends_after='  + _dayKey(day) + '&ends_before=' + _dayKey(beforeDay);
         return _apiRoot + queryString;
     }
 
