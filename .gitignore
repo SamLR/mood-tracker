@@ -5,3 +5,7 @@
 
 # Don't include CSS
 mood-tracker/static/css
+
+# Don't include build stuff
+node_modules/
+dist/

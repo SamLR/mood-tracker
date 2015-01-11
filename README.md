@@ -32,3 +32,27 @@ Today is a form split into two broad groups:
             * Rating [0, 5] stars
         + Notes
             * A text field
+
+## Deploy ##
+
+Several steps in deploy, split into 'local' and 'remote'
+
+    1. Less -> CSS
+    3. Create ng template file
+    2. Concat & Uglify JS & CSS
+    4. Move to dist folder:
+        * index.html
+        * vendor.js
+        * scripts.js
+        * template.js
+        * main.css
+        * fonts
+        * images
+        * python files?
+    5. Copy to server
+    6. Run:
+        * `virtualenv -r requirements.txt mood_tracker`
+        * `./manage.py migrate`
+    7. mod_wsgi restart?
+
+Probably other stuff too...
