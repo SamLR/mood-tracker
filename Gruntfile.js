@@ -61,6 +61,29 @@ module.exports = function(grunt) {
                     src: ['*'],
                     dest: 'dist/fonts/'
                 }]
+            },
+            index: {
+                files:[{
+                    expand: true,
+                    cwd: 'mood-tracker/templates/',
+                    src: 'index.html',
+                    dest: 'dist/'
+                }]
+            },
+            python: {
+                files:[{
+                    expand: true,
+                    cwd: 'mood-tracker/',
+                    src: ['mood_tracker/**/*.py', 'tracker/**/*.py'],
+                    dest: 'dist/'
+                }]
+            },
+            requirements: {
+                files: [{
+                    expand: true,
+                    src: 'requirements.txt',
+                    dest: 'dist/'
+                }]
             }
         },
         clean: {
@@ -77,6 +100,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-angular-templates');
 
     grunt.registerTask('makeJS',  ['ngtemplates', 'uglify', 'concat']);
+
     grunt.registerTask('default', [
         'clean:dist',
         'makeJS',
