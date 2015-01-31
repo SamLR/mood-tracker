@@ -17,14 +17,14 @@ BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), '..')
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '52*+8mgbls3xr-*qc$l_u8+)the6w@m714(n)1h%)3d%xbm=a3'
+SECRET_KEY = os.environ.get('TRACKER_SECRET_KEY', 'foobar')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tracker.samlr.com']
 
 
 # Application definition

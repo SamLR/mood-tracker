@@ -2,9 +2,12 @@ module.exports = function(grunt) {
     grunt.initConfig({
         ngtemplates: {
             main: {
-                src: 'mood-tracker/templates/partials/**/*.html',
+                cwd: 'mood-tracker/templates/',
+                src: 'partials/**/*.html',
                 dest: 'tmp/js/templates.js',
                 options: {
+                    prefix: '/static/',
+                    module: 'moodTracker',
                     htmlmin: {
                         collapseWhitespace: true,
                         collapseBooleanAttributes: true
