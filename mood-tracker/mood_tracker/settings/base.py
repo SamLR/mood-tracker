@@ -20,7 +20,7 @@ BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), '..')
 SECRET_KEY = '52*+8mgbls3xr-*qc$l_u8+)the6w@m714(n)1h%)3d%xbm=a3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -105,8 +105,9 @@ LOGIN_REDIRECT_URL = 'home'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS  = [
-    os.path.join(BASE_DIR, 'static'), 
-    os.path.join(BASE_DIR, 'templates'), 
+    os.path.join(BASE_DIR, 'static'),
 ]
+
+STATIC_ROOT = '/Users/scook/code/moo-mood/dist/static/'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'), ]

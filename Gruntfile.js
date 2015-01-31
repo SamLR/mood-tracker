@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     'mood-tracker/static/js/lib-min/ui-bootstrap-tpls-0.12.0.min.js',
                     'tmp/js/scripts.js'
                 ],
-                dest: 'dist/js/scripts.js'
+                dest: 'dist/static/js/scripts.js'
             }
         },
         less: {
@@ -46,11 +46,16 @@ module.exports = function(grunt) {
                     compress: true
                 },
                 files: {
-                    'dist/css/main.css': [
+                    'dist/static/css/main.css': [
                         'mood-tracker/static/css/*.css',
                         'mood-tracker/static/less/main.less'
                     ]
                 }
+            }
+        },
+        shell: {
+            main: {
+                command: 'mood-tracker/manage.py collectstatic --noinput --settings=mood_tracker.settings.collect_static'
             }
         },
         copy: {
@@ -59,15 +64,15 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: 'mood-tracker/static/fonts/',
                     src: ['*'],
-                    dest: 'dist/fonts/'
+                    dest: 'dist/static/fonts/'
                 }]
             },
             index: {
                 files:[{
                     expand: true,
                     cwd: 'mood-tracker/templates/',
-                    src: 'index.html',
-                    dest: 'dist/'
+                    src: '*.html',
+                    dest: 'dist/templates/'
                 }]
             },
             python: {
@@ -98,6 +103,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-shell');
 
     grunt.registerTask('makeJS',  ['ngtemplates', 'uglify', 'concat']);
 
@@ -106,6 +112,7 @@ module.exports = function(grunt) {
         'makeJS',
         'less',
         'copy',
+        'shell',
         'clean:tmp'
     ]);
 };
