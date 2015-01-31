@@ -79,7 +79,7 @@ module.exports = function(grunt) {
                 files:[{
                     expand: true,
                     cwd: 'mood-tracker/',
-                    src: ['mood_tracker/**/*.py', 'tracker/**/*.py'],
+                    src: ['mood_tracker/**/*.py', 'tracker/**/*.py', '*.py'],
                     dest: 'dist/'
                 }]
             },
