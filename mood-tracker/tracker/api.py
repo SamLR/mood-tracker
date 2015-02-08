@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
+
 
 from .models import TrackerLogEntry, EventType, Tags
 from .serialisers import TrackerLogEntrySerialiser, EventTypeSerialiser, TagsSerialiser
@@ -13,6 +14,7 @@ _filter_types = (
 )
 
 class LogViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, )
     serializer_class = TrackerLogEntrySerialiser
     model = TrackerLogEntry
 
@@ -37,22 +39,21 @@ log_detail = LogViewSet.as_view({
 
 
 class EventViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, )
     queryset = EventType.objects.all()
     serializer_class = EventTypeSerialiser
 
 event_list = EventViewSet.as_view({
-        'get': 'list',
-        'post': 'create',
+        'get': 'list'
     })
 
 event_detail = EventViewSet.as_view({
-        'get': 'retrieve',
-        'put': 'update',
-        'delete': 'destroy',
+        'get': 'retrieve'
     })
 
 
 class TagsViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated, )
     queryset = Tags.objects.all()
     serializer_class = TagsSerialiser
 
