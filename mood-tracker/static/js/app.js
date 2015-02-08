@@ -33,14 +33,31 @@ angular.module('moodTracker', ['ui.select','ui.router', 'ui.bootstrap', 'ngSanit
 // Our actual states
 .config(['$stateProvider', function ($stateProvider) {
 
-    $stateProvider.state('today', {
+    $stateProvider
+    .state('today', {
         url : '/',
-        templateUrl: '/static/partials/day.html',
-        controller: 'dayController'
+        views: {
+            menu: {
+                templateUrl: '/static/partials/menu.html',
+                controller: 'menuController'
+            },
+            main: {
+                templateUrl: '/static/partials/day.html',
+                controller: 'dayController'
+            } 
+        }
     })
     .state('log', {
-        url: '/log/{year:[0-9]{4}}/{month:[01][0-9]}/{day:[0123][0-9]}/',
-        templateUrl: '/static/partials/day.html',
-        controller: 'dayController'
+        url: '/log/:year/:month/:day/',
+        views: {
+            menu: {
+                templateUrl: '/static/partials/menu.html',
+                controller: 'menuController'
+            },
+            main: {
+                templateUrl: '/static/partials/day.html',
+                controller: 'dayController'
+            }
+        }
     });
 }]);

@@ -14,8 +14,9 @@
 </head>
 <body>
 
-<div class="container-fluid" data-ui-view>
-    If you can read this you need a better browser (or to enable javascript).
+<div class="container-fluid">
+    <div data-ui-view="menu"></div>
+    <div data-ui-view="main"></div>
 </div>
 
 {# Inject user info #}
@@ -39,6 +40,7 @@
     {# Our stuff #}
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/controllers/dayController.js' %}"></script>
+    <script src="{% static 'js/controllers/menuController.js' %}"></script>
     <script src="{% static 'js/directives/sleep.js' %}"></script>
     <script src="{% static 'js/services/eventTypeService.js' %}"></script>
     <script src="{% static 'js/services/tagsService.js' %}"></script>
