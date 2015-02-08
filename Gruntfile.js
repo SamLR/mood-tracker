@@ -92,6 +92,13 @@ module.exports = function(grunt) {
                     src: 'requirements.txt',
                     dest: 'dist/'
                 }]
+            },
+            robots: {
+                files: [{
+                    expand: true,
+                    src: 'robots.txt',
+                    dest: 'dist/static/'
+                }]
             }
         },
         clean: {
