@@ -66,7 +66,7 @@ angular.module('moodTracker')
                 _dayStart = moment({
                     year:  params.year,
                     month: params.month - 1, // moment considers Jan == 00
-                    day:   params.day
+                    date:  params.day
                 });
             } else {
                 _dayStart = moment().hours(0).minutes(0).seconds(0); // Start of today

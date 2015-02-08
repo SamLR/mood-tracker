@@ -10,7 +10,7 @@ from .views import BaseView
 
 urlpatterns = patterns('',
     url(r'^$', BaseView.as_view(), name='home'),
-    url(r'log/\d{4}/\d{2}/\d{2}/$', BaseView.as_view()),
+    url(r'log/\d{4}/\d{1,2}/\d{1,2}/$', BaseView.as_view()),
 
     url(r'^login/$', 'django.contrib.auth.views.login', 
         {'template_name': 'login.html'}, name='login'),
